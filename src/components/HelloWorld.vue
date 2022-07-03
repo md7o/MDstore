@@ -1,138 +1,223 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
+  <div>
+    <div class="bg-zinc-900">
+      <div class="flex justify-around py-32">
+        <img src="@/assets/photos/delivery-truck(1).png" width="250" />
+        <img src="@/assets/photos/shield.png" width="250" />
+        <img src="@/assets/photos/box.png" width="250" />
+      </div>
+      <div class="text-white text-6xl text-center pb-32">
+        <h1 class="pb-5">Express delivery service</h1>
+        <h1 class="text-5xl">High quality products</h1>
+      </div>
+      <!-- \\\\\\\\\\\\\\ -->
+    </div>
+    <div class="">
+      <!-- filtering -->
+      <div class="text-5xl text-center">
+        <button
+          class="bg-slate-500 text-white p-5 m-5 rounded-xl"
+          @click="isHidden = !isHidden"
         >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-          target="_blank"
-          rel="noopener"
-          >router</a
+          O
+        </button>
+      </div>
+      <div v-if="isHidden" class="bg-white w-1/2 mx-auto text-center my-12">
+        <div>
+          <div class="flex text-left justify-evenly">
+            <div>
+              <div class="">
+                <input type="checkbox" />
+                <label for="apple"> Huwaii </label>
+              </div>
+              <div class="">
+                <input type="checkbox" />
+                <label for="apple"> Samsung </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- products -->
+      <h1 class="text-4xl mb-12 text-center">Headphones</h1>
+      <div class="grid grid-cols-4 mx-80">
+        <div
+          v-for="item in products"
+          :key="item.id"
+          style="width: 28rem"
+          class="bg-white m-4 p-5"
         >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-          target="_blank"
-          rel="noopener"
-          >vuex</a
+          <!-- 1 -->
+          <div class="text-center">
+            <img :src="require(`@/assets/photos/${item.img}`)" />
+            <div>
+              <h1 class="text-xl text-roseBlue mb-2">{{ item.title }}</h1>
+              <h3 class="text-lg mb-2">{{ item.explained }}</h3>
+
+              <div class="text-2xl">${{ item.price / 100 }}</div>
+              <div class="row justify-end">
+                <button
+                  class="bg-blue-600 hover:bg-blue-500 rounded-2xl p-3 text-white mt-5"
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- dsadas -->
+
+    <div
+      class="bg-slate-400 h-96 rounded-2xl grid justify-center align-middle m-32"
+    >
+      <div>
+        <img class="w-60 mx-auto my-4" :src="img_src[currentSrc]" />
+      </div>
+      <div class="text-center">
+        <span
+          class="text-2xl text-black"
+          v-for="size in sizes"
+          :key="(size, Sis)"
         >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
+          size: {{ size }}
+        </span>
+      </div>
+      <div>
+        <button
+          v-for="(img, index) in img_src"
+          :key="index"
+          @mouseover="currentSrc = index"
+          class="mx-5 bg-orange-500 py-6 px-6 text-white font-bold hover:bg-orange-400 hover:transition-all"
+        ></button>
+
+        <button
+          @click="size"
+          class="mx-5 bg-teal-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-teal-400 hover:transition-all"
         >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest"
-          target="_blank"
-          rel="noopener"
-          >unit-jest</a
+          small
+        </button>
+
+        <button
+          @click="add"
+          class="mx-5 bg-green-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-green-400 hover:transition-all"
         >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
+          Add
+        </button>
+        <button
+          @click="remover"
+          class="mx-5 bg-red-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-red-400 hover:transition-all"
         >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+          remove
+        </button>
+      </div>
+    </div>
+    <div class="my-32 text-center text-3xl">
+      <span>Cart({{ Cart }})</span>
+    </div>
+    <div>
+      <div
+        class="text-center text-3xl cursor-pointer"
+        @mouseover="hovered = true"
+        @mouseleave="hovered = false"
+      >
+        <p class="bg-slate-500 text-white text-center w-48 mx-auto">hlao</p>
+        <span class="relative bottom-24" v-show="hovered">dsadasdsa</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "HelloWorld",
-  props: {
-    msg: String,
+  data() {
+    return {
+      products: [
+        {
+          id: 1,
+          title: "BEATS Solo3 Wireless Wireless ",
+          explained: "High quality products",
+          price: 29999,
+          img: "beast.png",
+        },
+        {
+          id: 2,
+          title: "HUAWEI FreeBuds Studio",
+          explained: "High quality products",
+          price: 32999,
+          img: "huawei.png",
+        },
+        {
+          id: 3,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+        {
+          id: 4,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+        {
+          id: 5,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+        {
+          id: 6,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+        {
+          id: 7,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+        {
+          id: 8,
+          title: "APPLE AirPods Max Wireless",
+          explained: "High quality products",
+          price: 55999,
+          img: "Appleheadphones.png",
+        },
+      ],
+      isHidden: false,
+      hovered: false,
+      Cart: 0,
+      img_src: [
+        "https://cdn-icons-png.flaticon.com/512/7020/7020787.png",
+        "https://cdn-icons-png.flaticon.com/512/7020/7020788.png",
+      ],
+      currentSrc: 0,
+    };
+  },
+  methods: {
+    add() {
+      this.Cart++;
+    },
+
+    remover() {
+      if (this.Cart > 0) {
+        this.Cart--;
+      }
+    },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style>
+body {
+  background-color: #eaeaea;
 }
 </style>
