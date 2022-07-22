@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MainHeader />
     <div class="bg-zinc-900">
       <div class="flex justify-around py-32">
         <img src="@/assets/photos/delivery-truck(1).png" width="250" />
@@ -16,10 +17,10 @@
       <!-- filtering -->
       <div class="text-5xl text-center">
         <button
-          class="bg-slate-500 text-white p-5 m-5 rounded-xl"
+          class="bg-slate-900 text-white px-5 py-2 m-3 rounded-full"
           @click="isHidden = !isHidden"
         >
-          O
+          V
         </button>
       </div>
       <div v-if="isHidden" class="bg-white w-1/2 mx-auto text-center my-12">
@@ -40,90 +41,32 @@
       </div>
       <!-- products -->
       <h1 class="text-4xl mb-12 text-center">Headphones</h1>
-      <div class="grid grid-cols-4 mx-80">
-        <div
-          v-for="item in products"
-          :key="item.id"
-          style="width: 28rem"
-          class="bg-white m-4 p-5"
-        >
+      <div class="grid grid-cols-4 justify-center">
+        <div v-for="item in products" :key="item.id" class="bg-white m-4 p-5">
           <!-- 1 -->
           <div class="text-center">
-            <img :src="require(`@/assets/photos/${item.img}`)" />
-            <div>
-              <h1 class="text-xl text-roseBlue mb-2">{{ item.title }}</h1>
-              <h3 class="text-lg mb-2">{{ item.explained }}</h3>
+            <router-link to="about"
+              ><img
+                class="w-96 mx-auto"
+                :src="require(`@/assets/photos/${item.img}`)"
+              />
 
-              <div class="text-2xl">${{ item.price / 100 }}</div>
-              <div class="row justify-end">
-                <button
-                  class="bg-blue-600 hover:bg-blue-500 rounded-2xl p-3 text-white mt-5"
-                >
-                  Add to cart
-                </button>
-              </div>
+              <h1 class="text-xl text-roseBlue mb-2 hover:underline">
+                {{ item.title }}
+              </h1>
+
+              <div class="text-2xl">${{ item.price / 100 }}</div></router-link
+            >
+            <div class="row justify-end">
+              <button
+                @click="$store.commit('add')"
+                class="bg-blue-600 hover:bg-blue-500 rounded-2xl p-3 text-white mt-5"
+              >
+                Add to cart
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- dsadas -->
-
-    <div
-      class="bg-slate-400 h-96 rounded-2xl grid justify-center align-middle m-32"
-    >
-      <div>
-        <img class="w-60 mx-auto my-4" :src="img_src[currentSrc]" />
-      </div>
-      <div class="text-center">
-        <span
-          class="text-2xl text-black"
-          v-for="size in sizes"
-          :key="(size, Sis)"
-        >
-          size: {{ size }}
-        </span>
-      </div>
-      <div>
-        <button
-          v-for="(img, index) in img_src"
-          :key="index"
-          @mouseover="currentSrc = index"
-          class="mx-5 bg-orange-500 py-6 px-6 text-white font-bold hover:bg-orange-400 hover:transition-all"
-        ></button>
-
-        <button
-          @click="size"
-          class="mx-5 bg-teal-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-teal-400 hover:transition-all"
-        >
-          small
-        </button>
-
-        <button
-          @click="add"
-          class="mx-5 bg-green-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-green-400 hover:transition-all"
-        >
-          Add
-        </button>
-        <button
-          @click="remover"
-          class="mx-5 bg-red-500 rounded-xl py-2 px-10 text-white font-bold hover:bg-red-400 hover:transition-all"
-        >
-          remove
-        </button>
-      </div>
-    </div>
-    <div class="my-32 text-center text-3xl">
-      <span>Cart({{ Cart }})</span>
-    </div>
-    <div>
-      <div
-        class="text-center text-3xl cursor-pointer"
-        @mouseover="hovered = true"
-        @mouseleave="hovered = false"
-      >
-        <p class="bg-slate-500 text-white text-center w-48 mx-auto">hlao</p>
-        <span class="relative bottom-24" v-show="hovered">dsadasdsa</span>
       </div>
     </div>
   </div>
@@ -134,6 +77,9 @@ export default {
   name: "HelloWorld",
   data() {
     return {
+      Cart: 0,
+      isHidden: false,
+      hovered: false,
       products: [
         {
           id: 1,
@@ -192,27 +138,15 @@ export default {
           img: "Appleheadphones.png",
         },
       ],
-      isHidden: false,
-      hovered: false,
-      Cart: 0,
       img_src: [
         "https://cdn-icons-png.flaticon.com/512/7020/7020787.png",
         "https://cdn-icons-png.flaticon.com/512/7020/7020788.png",
       ],
+
       currentSrc: 0,
     };
   },
-  methods: {
-    add() {
-      this.Cart++;
-    },
-
-    remover() {
-      if (this.Cart > 0) {
-        this.Cart--;
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 

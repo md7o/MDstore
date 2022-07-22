@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import MainHeader from "@/components/MainHeader.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 export default {
@@ -17,3 +16,5 @@ export default {
   },
 };
 </script>
+
+<style></style>
